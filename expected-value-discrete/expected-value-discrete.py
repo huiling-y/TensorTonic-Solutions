@@ -7,8 +7,10 @@ def expected_value_discrete(x, p):
     # Write code here
     x = np.asarray(x)
     p = np.asarray(p)
+    
     if not np.allclose(np.sum(p), 1.0, atol=1e-6):
         raise ValueError("p should sum up to 1.0")
+        
     E = np.sum(x * p)
     return E
     
