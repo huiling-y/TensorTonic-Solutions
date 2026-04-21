@@ -27,8 +27,8 @@ def rnn_step_backward(dh, cache):
     # Chain rule: dL/dz = dL/dh_t ⊙ tanh'(z)  (⊙ = element-wise product)
     dz = dh * tanh_derivative  # shape (H,) - upstream gradient modulated by activation derivative
 
-    dx_t = W.T @ dz
-    dh_prev = U.T @ dz 
+    dx_t = dz @ W # W.T @ dz
+    dh_prev = dz @ U # U.T @ dz 
     dW = np.outer(dz, x_t)
     dU = np.outer(dz, h_prev)
     db = dz 
