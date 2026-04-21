@@ -22,7 +22,10 @@ def rnn_step_backward(dh, cache):
     U = np.asarray(U)
     b = np.asarray(b)
     
-    dz = dh * (1 - h_t**2)
+    tanh_derivative = 1 - h_t ** 2  # shape (H,) - element-wise derivative
+    
+    # Chain rule: dL/dz = dL/dh_t ⊙ tanh'(z)  (⊙ = element-wise product)
+    dz = dh * tanh_derivative  # shape (H,) - upstream gradient modulated by activation derivative
 
     dx_t = W.T @ dz
     dh_prev = U.T @ dz 
