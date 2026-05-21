@@ -7,9 +7,7 @@ def pearson_correlation(X):
     # Write code here
     X = np.asarray(X, dtype=float)
 
-    if X.ndim != 2:
-        return None
-    if len(X) < 2:
+    if X.ndim != 2 or len(X) < 2:
         return None
 
     centered = X - np.mean(X, axis=0, keepdims=True)
