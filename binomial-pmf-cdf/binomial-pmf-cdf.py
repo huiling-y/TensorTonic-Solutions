@@ -6,15 +6,10 @@ def binomial_pmf_cdf(n, p, k):
     Compute Binomial PMF and CDF.
     """
     # Write code here
+    pmf = comb(n,k) * p**k * (1-p)**(n-k)
 
-    if k == 0:
-        return ((1-p)**n, (1-p)**n)
-    elif k == n:
-        return (p**n, 1)
-    else:
-        cdf = 0
-        for i in range(k+1):
-            pmf = comb(n, i) * p**i * (1-p)**(n-i)
-            cdf += pmf 
+    cdf = 0
+    for i in range(k+1):
+        cdf += comb(n,i) * p**i * (1-p)**(n-i)
 
-        return (pmf, cdf)
+    return float(pmf), float(cdf)
